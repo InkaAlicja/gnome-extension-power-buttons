@@ -25,7 +25,7 @@ let powerOffIcon;
 
 function init () {
     powerOffIcon = new St.Icon({
-        icon_name: 'system-shutdown',
+        icon_name: 'system-shutdown-symbolic',
         style_class: 'system-status-icon'
     });
 
@@ -40,7 +40,7 @@ function init () {
     powerOffButton.connect('button-press-event', powerOff);
 
     suspendIcon = new St.Icon({
-        icon_name: 'media-playback-pause',
+        icon_name: 'weather-clear-night-symbolic',
         style_class: 'system-status-icon'
     });
 
