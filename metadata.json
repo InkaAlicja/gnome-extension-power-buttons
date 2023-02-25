@@ -3,6 +3,6 @@
     "description" : "Poweroff and suspend buttons for GNOME desktop environment",
     "shell-version" : ["42"],
     "url" : "https://github.com/InkaAlicja/gnome-extension-power-buttons",
-    "uuid" : "gnome-extension-poweroff-button@InkaAlicja",
+    "uuid" : "extension-poweroff-button@InkaAlicja",
     "version" : 2
 }
