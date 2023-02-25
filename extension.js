@@ -7,7 +7,7 @@ function powerOff() {
         var value = GLib.spawn_command_line_async('gnome-session-quit --power-off');
     } catch (err) {
         Main.notify(err + ": gnome-extension-poweroff-button@InkaAlicja experienced an error");
-        log("inka:" + err);
+        log("gnome-extension-poweroff-button@InkaAlicja:" + err);
     }
 }
 
@@ -16,14 +16,21 @@ function suspend() {
         var value = GLib.spawn_command_line_async('systemctl suspend');
     } catch (err) {
         Main.notify(err + ": gnome-extension-poweroff-button@InkaAlicja experienced an error");
+        log("gnome-extension-poweroff-button@InkaAlicja:" + err);
     }
 }
 
 let powerOffButton;
-let sleepButton;
 let powerOffIcon;
+let suspendIcon;
+let suspendButton;
 
-function init () {
+let powerOffConnection;
+let suspendConnection;
+
+function init () {}
+
+function enable () {
     powerOffIcon = new St.Icon({
         icon_name: 'system-shutdown-symbolic',
         style_class: 'system-status-icon'
@@ -37,7 +44,7 @@ function init () {
     });
 
     powerOffButton.set_child(powerOffIcon);
-    powerOffButton.connect('button-press-event', powerOff);
+    powerOffConnection = powerOffButton.connect('button-press-event', powerOff);
 
     suspendIcon = new St.Icon({
         icon_name: 'weather-clear-night-symbolic',
@@ -52,13 +59,39 @@ function init () {
     });
 
     suspendButton.set_child(suspendIcon);
-    suspendButton.connect('button-press-event', suspend);
-}
-function enable () {
+    suspendConnection = suspendButton.connect('button-press-event', suspend);
+
     Main.panel._rightBox.insert_child_at_index(suspendButton, -1);
     Main.panel._rightBox.insert_child_at_index(powerOffButton, -1);
 }
+
 function disable() {
     Main.panel._rightBox.remove_child(suspendButton);
     Main.panel._rightBox.remove_child(powerOffButton);
+
+    if(powerOffIcon) {
+        powerOffIcon.destroy();
+        powerOffIcon = null;
+    }
+    if(powerOffButton) {
+        if(powerOffConnection){
+            powerOffButton.disconnect(powerOffConnection);
+            powerOffConnection = null;
+        }
+        powerOffButton.destroy();
+        powerOffButton = null;
+    }
+    if(suspendIcon) {
+        suspendIcon.destroy();
+        suspendIcon = null;
+    }
+    if(suspendButton) {
+        if(suspendConnection){
+            suspendButton.disconnect(suspendConnection);
+            suspendConnection = null;
+        }
+        suspendButton.destroy();
+        suspendButton = null;
+    }
+
 }
