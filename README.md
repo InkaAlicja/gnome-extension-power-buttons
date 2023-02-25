@@ -1,4 +1,4 @@
-A GNOME 42 plugin that adds a poweroff and a suspend button to the top bar. The icons are planned to be improved
+A GNOME 42 plugin that adds a poweroff and a suspend button to the top bar.
 
 ![screenshot](Screenshot.png)
 
