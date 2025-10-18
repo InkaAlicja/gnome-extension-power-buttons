@@ -10,4 +10,4 @@ Add this folder to `~/.local/share/gnome-shell/extensions/`
 
 Press `alt` + `f2`, type `r` and press `enter` to reload the GNOME desktop environment
 
-Run `gnome-extensions enable gnome-extension-poweroff-button@InkaAlicja`
+Run `gnome-extensions enable extension-poweroff-button@InkaAlicja`
